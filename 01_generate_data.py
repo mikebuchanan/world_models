@@ -4,6 +4,7 @@ import numpy as np
 import random
 import config
 #import matplotlib.pyplot as plt
+from gym.envs.box2d.car_dynamics import Car
 
 from env import make_env
 
@@ -42,6 +43,10 @@ def main(args):
                 print('-----')
                 observation = env.reset()
                 observation = config.adjust_obs(observation)
+
+                # Position car randomly on track
+                position = np.random.randint(len(env.track))
+                env.car = Car(env.world, *env.track[position][1:4])
 
                 # plt.imshow(observation)
                 # plt.show()
